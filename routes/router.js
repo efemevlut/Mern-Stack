@@ -17,13 +17,13 @@ router.use("/auth", AuthRouter)
  * @route /api/profile
  * @desc Route for Profile
 */
-router.use("/profile", ProfileRouter)
+// router.use("/profile", ProfileRouter)
 
 /**
  * @route /api/book
  * @desc Route for Book
 */
-router.use("/book", BookRouter)
+// router.use("/book", BookRouter)
 
 
 
