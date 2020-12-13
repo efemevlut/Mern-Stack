@@ -8,9 +8,10 @@ const connectDB = async () => {
       useFindAndModify: false,
       useCreateIndex: true,
     });
-    console.log("Successfully connected DB");
+    console.log("Successfully connected to DB");
   } catch (error) {
     console.log("Error connecting DB", error);
   }
 };
+
 module.exports = connectDB;
