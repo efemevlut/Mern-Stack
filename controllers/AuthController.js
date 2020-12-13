@@ -5,14 +5,10 @@ const { validationResult } = require("express-validator");
 exports.authRegister = async (req, res) => {
   const { firstName, lastName, email, password } = req.body;
 
-  //TODO1: validate the fields
-
-  
   const validationErr = validationResult(req);
-  console.log("validationErr", validationErr);
 
-  if(validationErr.errors.length > 0){
-      return res.status(400).json({errors: validationErr.array()})
+  if (validationErr.errors.length > 0) {
+    return res.status(400).json({ errors: validationErr.array() });
   }
   const userData = await User.findOne({ email });
 
@@ -39,8 +35,32 @@ exports.authRegister = async (req, res) => {
   res.send("Register Completed");
 };
 
-exports.authLogin = (req, res) => {
-  //TODO Auth.
-  //TODO Login func
+exports.authLogin = async (req, res) => {
+  const { firstName, lastName, email, password } = req.body;
+
+  const validationErr = validationResult(req);
+
+  // Field validation
+  if (validationErr.errors.length > 0) {
+    return res.status(400).json({ errors: validationErr.array() });
+  }
+
+  // User exist check
+  const userData = await User.findOne({ email });
+  if (!userData) {
+    return res
+      .status(400)
+      .json({ errors: [{ message: "User dosesn't exist!!" }] });
+  }
+
+  //Password compare
+  const isPasswordMatch = await bcrypt.compare(password, userData.password);
+
+  if (!isPasswordMatch) {
+    return res
+      .status(400)
+      .json({ errors: [{ message: "Invalid credentials" }] });
+  }
+  //TODO authentaciation return Json web token  jwt
   res.send("Login completed");
 };
