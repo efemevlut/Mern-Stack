@@ -11,7 +11,7 @@ export default function Cart({}) {
   return (
     <div>
       <div class="shopping-cart">
-        <div class="title">Shopping Bag</div>
+        <h1 class="title">Shopping Cart</h1>
 
         <div class="item">
           <div class="buttons">
@@ -39,11 +39,11 @@ export default function Cart({}) {
         <StripeCheckout
           stripeKey="pk_test_4TbuO6qAW2XPuce1Q6ywrGP200NrDZ2233"
           token={() => toast("OK")}
-          name="Tesla Roadster"
+          name="Pay with Stripe"
           //  billingAddress
           //  shippingAddress
-          panelLabel="Give Money" // prepended to the amount in the bottom pay button
-          amount={1000000} // cents
+          panelLabel="Pay" // prepended to the amount in the bottom pay button
+          amount={54900} // cents
           currency="USD"
         />
       </div>
